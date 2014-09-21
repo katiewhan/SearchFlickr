@@ -1,0 +1,47 @@
+<html>
+	<head>
+		<title>SearchFlickr</title>
+		<link rel = "stylesheet" type = "text/css" href = "../static/Style Sheet.css">
+	</head>
+
+	<body>
+		<div id = "head"><a href = "/" style = "text-decoration: none;">Search Public Photos on Flickr</a></div>
+		<br/> 
+		<div id = "body">
+			Fill in desired search criteria.
+			<hr>
+			<form action = "/result" method = "POST">
+				Username of uploader
+				<br/>
+				<input type = "text" name = "ui">
+				<br/> <br/>
+				Tags (separated by commas)
+				<br/>
+				<input type = "text" size = "35" name = "tg">
+				<br/> <br/>
+				Any text to search
+				<br/>
+				<input type = "text" size = "35" name = "tx">
+				<br/> <br/> 
+				Upload date (YYYY-MM-DD)
+				<br/>
+				from <input type = "text" name = "mnu"> until <input type = "text" name = "mxu">
+				<br/> 
+				*You need to provide at least one more specification when searching for upload date.
+				<br/> <br/> 
+				Location
+				<br/>
+				<div class = "tab">Longitude
+				<br/>
+				from <input type = "text" name = "mnlong"> to <input type = "text" name = "mxlong">
+				<br/>
+				Latitude
+				<br/>
+				from <input type = "text" name = "mnlat"> to  <input type = "text" name = "mxlat">
+				</div>
+				<br/>
+				<input type = "submit" value = "Search!">
+			</form>
+		</div>
+	</body>
+</html>

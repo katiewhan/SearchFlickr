@@ -1,0 +1,31 @@
+#head {
+	font-family: Courier;
+	font-size: 20pt;
+	font-weight: bold;
+	color: #78C7C7;
+}
+
+#body {
+	font-family: Courier;
+	font-size: 10pt;
+	color: #342D7E;
+	line-height: 150%
+}
+
+body {
+	margin: 3% 5%;
+}
+
+.tab{
+	margin-left: 40px;
+}
+
+a:link {
+	color: #78C7C7;
+	font-weight: bold;
+}
+
+a:visited {
+	color: #78C7C7;
+	font-weight: bold;
+}

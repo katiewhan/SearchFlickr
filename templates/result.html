@@ -1,0 +1,46 @@
+$def with (num, pid, thumbs, links, params)
+
+<html>
+	<head>
+		<title>SearchFlickr</title>
+		<link rel = "stylesheet" type = "text/css" href = "../static/Style Sheet.css">
+	</head>
+
+	<body>
+		<div id = "head"><a href = "../" style = "text-decoration: none;">Search Public Photos on Flickr</a></div>
+		<br/>
+		<div id = "body">
+			Here is your search result. A total of $num photos were found.
+			$if num != '0':
+				Click on the thumbnail image to visit the original page.
+				If you wish to download original photos, select photos and click 'Download'.
+				<hr>
+				<form action = "../next/$params" method = "POST" onsubmit = "return start();">
+				<table cellpadding = 15>
+				$for x in range(1,5):
+					<tr>
+					$for i in range(5*(x-1), 5*x):
+						<td>
+						$if i < len(thumbs):
+							<a href = "$links[i]"><img align = "center" src = "$thumbs[i]"></a>
+							<input type = "checkbox" name = "$pid[i]">
+						</td>
+					</tr>
+				</table>
+				<input type = "submit" value = "Download">
+				</form>
+				<br/>
+				<button onclick="back()">Back</button>
+				<a href = "../next/$params"><button>Next Page!</button></a>
+		</div>
+	</body>
+
+	<script>
+		function start() {
+			alert("Your download is starting... You will be directed to the next page.");
+		}
+		function back() {
+				window.history.back();
+		}
+	</script>
+</html>
