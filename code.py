@@ -18,6 +18,7 @@ urls = (
 
 render = web.template.render('templates/')
 
+# global function getting and returning search results
 def search(param):
     thumbs = []
     orgs = []
@@ -47,6 +48,7 @@ class index:
         return render.index()
 
 class result:
+    # set parameter of search appropriately and call search
     def setParam(self, user_in, tags_in, text_in, minUpload, maxUpload, minLong, maxLong, minLat, maxLat, page_in):
         user = ''
         box = ''
@@ -71,19 +73,22 @@ class result:
                        per_page = 20,
                        page = page_in)
         return search(param)
-
+    
+    # get user input
     def POST(self):
         i = web.input()
         n, i, t, l, p = self.setParam(i.ui, i.tg, i.tx, i.mnu, i.mxu, i.mnlong, i.mxlong, i.mnlat, i.mxlat, 1)
         return render.result(n, i, t, l, p)
 
 class next:
+    # render next search results page
     def GET(self, param):
         p = eval(param)
         p['page'] += 1
         num, pid, thumbs, links, params = search(p)
         return render.result(num, pid, thumbs, links, params)
-
+    
+    # download photo to DOWNLOAD directory in the background
     def longrunning(self, w):
         for i in w:
             try:
@@ -96,17 +101,14 @@ class next:
             except flickrapi.exceptions.FlickrError:
                 print "Could not download" + i
         print "Finished download."
-        
+    
+    # direct user page to next search results while downloading
     def POST(self, param):
         print "Downloading image(s)..."
         w = web.input().keys()
         thread = threading.Thread(target = self.longrunning, args = [w])
         thread.start()
         return self.GET(param)
-        #p = eval(param)
-        #p['page'] += 1
-        #num, pid, thumbs, links, params = search(p)
-        #return render.result(num, pid, thumbs, links, params)
 
 if __name__ == "__main__":
     app = web.application(urls, globals())
